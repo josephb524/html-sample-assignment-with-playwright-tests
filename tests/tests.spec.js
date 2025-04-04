@@ -1,15 +1,16 @@
+import settings from "../.vscode/settings.json";
 const {
   "liveServer.settings.port": liveServerPort,
-} = require("../.vscode/settings.json");
+} = settings;
 
 // @ts-check
-const { test, expect, describe } = require("@playwright/test");
+import { test, expect, describe } from "@playwright/test";
 const mainPageUrl = `http://localhost:${liveServerPort}/`;
 const cleanArrFromEmptyItems = (arr) => arr.filter((item) => item !== "");
 
 // Makes sure to back to the main page of the project before every next test
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto(mainPageUrl);
 });
 
 describe("Environment and Global document's level tests", () => {
